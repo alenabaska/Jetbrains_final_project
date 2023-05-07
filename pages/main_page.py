@@ -1,9 +1,6 @@
 from .base_page import BasePage
 from selenium.webdriver.common.by import By
-from .login_page import LoginPage
-
-class MainPageLocators():
-    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+from .locators import MainPageLocators
 
 class MainPage(BasePage): 
     def go_to_login_page(self):

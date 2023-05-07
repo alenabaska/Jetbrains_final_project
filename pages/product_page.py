@@ -1,17 +1,7 @@
-from .base_page import BasePage
-from .locators import LoginPageLocators
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoAlertPresentException 
 import math
-
-class Locators():
-    BUSKET = (By.CSS_SELECTOR, ".btn-add-to-basket")
-    NAME_IN_MESSAGE = (By.CSS_SELECTOR, ".alert strong")
-    NAME_OF_BOOK = (By.CSS_SELECTOR, ".product_main h1")
-    PRICE_IN_BUSKET = (By.CSS_SELECTOR, ".alert-info strong")
-    PRICE_OF_PRODUCT = (By.CSS_SELECTOR, ".product_main .price_color")
-    
-    
+from .base_page import BasePage
+from selenium.common.exceptions import NoAlertPresentException 
+from .locators import ProductPageLocators
 
 class ProductPage(BasePage):
 
@@ -30,11 +20,23 @@ class ProductPage(BasePage):
             print("No second alert presented")
 
     def add_to_busket(self):
-        link = self.browser.find_element(*Locators.BUSKET)
+        link = self.browser.find_element(*ProductPageLocators.BUSKET)
         link.click()
 
     def should_be_price_the_same(self):
-        assert self.browser.find_element(*Locators.NAME_IN_MESSAGE).text == self.browser.find_element(*Locators.NAME_OF_BOOK).text, "Name is not the same"
+        name = self.browser.find_element(*ProductPageLocators.NAME_IN_MESSAGE).text
+        name2 = self.browser.find_element(*ProductPageLocators.NAME_OF_BOOK).text
+        assert name == name2, "Name is not the same"
 
     def should_be_name_the_same(self):
-        assert self.browser.find_element(*Locators.PRICE_IN_BUSKET).text == self.browser.find_element(*Locators.PRICE_OF_PRODUCT).text, "Price is not the same"
+        price = self.browser.find_element(*ProductPageLocators.PRICE_IN_BUSKET).text
+        price2 = self.browser.find_element(*ProductPageLocators.PRICE_OF_PRODUCT).text
+        assert price == price2, "Price is not the same"
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.NAME_IN_MESSAGE), \
+       "Success message is presented, but should not be"
+        
+    def should_disappeared(self):
+        assert self.is_not_element_present(*ProductPageLocators.NAME_IN_MESSAGE), \
+       "Success message is disappeared"
