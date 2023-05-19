@@ -34,7 +34,7 @@ class ProductPage(BasePage):
         link.click()
 
     def should_be_price_the_same(self):
-        assert self.browser.find_element(*Locators.NAME_IN_MESSAGE).text == self.browser.find_element(*Locators.NAME_OF_BOOK).text, "name is not the same"
+        assert self.browser.find_element(*Locators.NAME_IN_MESSAGE).text == self.browser.find_element(*Locators.NAME_OF_BOOK).text, "Name is not the same"
 
     def should_be_name_the_same(self):
-        assert self.browser.find_element(*Locators.PRICE_IN_BUSKET).text == self.browser.find_element(*Locators.PRICE_OF_PRODUCT).text, "price is not the same"
+        assert self.browser.find_element(*Locators.PRICE_IN_BUSKET).text == self.browser.find_element(*Locators.PRICE_OF_PRODUCT).text, "Price is not the same"
